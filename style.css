@@ -11,3 +11,12 @@ body {
     border-radius: 15px;    /* Membuat sudut melengkung */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Efek bayangan */
 }
+.kartu-profil img {
+    width: 150px;            /* Atur lebar gambar jadi 150 piksel */
+    border-radius: 50%;      /* Biar sudut gambar dibulatkan sampai jadi lingkaran sempurna */
+}
+
+.kartu-profil {
+    /* ... (kode lain dari sebelumnya, misalnya width, margin, padding, dll) ... */
+    text-align: center;      /* Semua teks di dalam .kartu-profil rata tengah */
+}
