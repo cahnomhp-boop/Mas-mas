@@ -3,25 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rumah Senja</title>
+    <title>Game Item Shop - Top Up Murah</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <div class="kartu-profil">
-        <img src="WhatsApp Image 2025-04-05 at 10.31.39.jpeg" alt="Foto profil saya">
-        <h1>Nicolas Satriya Bhagasakara</h1>
-        <p>Siswa yang kagum dengan senja.</p>
-            <div class="kartu-profil">
-                 <a href="https://www.instagram.com/nicolas_191008?igsh=MWlKaWlRsOXU5MHN4NQ==" target="_blank">
-            Kunjungi Instagram saya
-    <!-- ... konten sebelumnya ... -->
-    <a href="https://www.instagram.com/usernameanda" target="_blank">Kunjungi Instagram Saya</a>
-    <button id="sapaButton">Sapa Saya!</button>
-</div>
 
-     </a>
-    </div>
-    <!-- Konten tambahan bisa ditulis di sini -->
-<script src="script.js"></script>
+    <header>
+        <h1>💎 Game Item Store 💰</h1>
+        <p>Pilih game favoritmu dan temukan item terbaik!</p>
+    </header>
+
+    <main>
+        <section id="game-selection">
+            <h2>Pilih Game</h2>
+            <div class="game-options">
+                <button class="game-btn" data-game="roblox">
+                    <span class="icon">🚀</span> Roblox
+                </button>
+                <button class="game-btn" data-game="freefire">
+                    <span class="icon">🔥</span> Free Fire
+                </button>
+                <button class="game-btn" data-game="mobilelegend">
+                    <span class="icon">⚔️</span> Mobile Legends
+                </button>
+            </div>
+        </section>
+
+        <section id="item-list-section" style="display: none;">
+            <h2>Daftar Item untuk <span id="selected-game-name"></span></h2>
+            <div id="item-list" class="item-grid">
+                </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Game Item Shop. Semua hak dilindungi.</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
