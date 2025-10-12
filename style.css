@@ -1,24 +1,47 @@
-body {
-bady {
-  background_color: #f5f5f5; /* Warna kuning cerah */
-  font-family: Arial, sans-serif; /* Jenis huruf yang bersih dan mudah dibaca */
-  color: #191970; /* Warna teks utama (Biru Gelap) */
-}
-.kartu-profil {
-    width: 300px;
-    margin: 50px auto;  /* 50px atas/bawah, auto untuk tengah kiri/kanan */
-    padding: 20px;      /* jarak isi (content) dengan pinggir kotak */
-    background-color: white;   /* warna latar belakang kotak jadi putih */
-    border-radius: 15px;    /* Membuat sudut melengkung */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Efek bayangan */
-}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Item Shop - Top Up Murah</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
 
-.kartu-profil img {
-    width: 150px;            /* Atur lebar gambar jadi 150 piksel */
-    border-radius: 50%;      /* Biar sudut gambar dibulatkan sampai jadi lingkaran sempurna */
-}
+    <header>
+        <h1>💎 Game Item Store 💰</h1>
+        <p>Pilih game favoritmu dan temukan item terbaik!</p>
+    </header>
 
-.kartu-profil {
-    /* ... (kode lain dari sebelumnya, misalnya width, margin, padding, dll) ... */
-    text-align: center;      /* Semua teks di dalam .kartu-profil rata tengah */
-}
+    <main>
+        <section id="game-selection">
+            <h2>Pilih Game</h2>
+            <div class="game-options">
+                <button class="game-btn" data-game="roblox">
+                    <span class="icon">🚀</span> Roblox
+                </button>
+                <button class="game-btn" data-game="freefire">
+                    <span class="icon">🔥</span> Free Fire
+                </button>
+                <button class="game-btn" data-game="mobilelegend">
+                    <span class="icon">⚔️</span> Mobile Legends
+                </button>
+            </div>
+        </section>
+
+        <section id="item-list-section" style="display: none;">
+            <h2>Daftar Item untuk <span id="selected-game-name"></span></h2>
+            <div id="item-list" class="item-grid">
+                </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Game Item Shop. Semua hak dilindungi.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
