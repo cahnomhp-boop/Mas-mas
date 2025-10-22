@@ -1,26 +1,101 @@
-/* ... (SEMUA KODE CSS SEBELUMNYA TETAP SAMA) ... */
-
-/* Tambahkan ini di bagian bawah file style_perkenalan.css */
-.tagline {
-    font-style: italic;
-    color: #e0e0ff;
-    margin-bottom: 30px;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding-top: 50px;
+    margin: 0;
 }
 
-/* Styling untuk Kursor Ketikan Otomatis (Typing Effect) */
-#typing-text {
-    border-right: 3px solid #ffc107; /* Kursor berkedip */
-    white-space: nowrap; /* Mencegah teks pindah baris */
-    overflow: hidden; /* Sembunyikan teks yang belum diketik */
-    margin: 0 auto;
-    width: fit-content;
-    padding-right: 5px; /* Jarak antara teks dan kursor */
-    animation: 
-        blink-caret 0.75s step-end infinite; /* Animasi kursor berkedip */
+.wadah {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
 }
 
-/* Keyframes untuk Kursor Berkedip */
-@keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: #ffc107; }
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.input-tugas {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+#inputTugas {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px 0 0 5px;
+    font-size: 16px;
+}
+
+.input-tugas button {
+    padding: 10px 15px;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.input-tugas button:hover {
+    background-color: #4cae4c;
+}
+
+#daftarTugas {
+    list-style: none;
+    padding: 0;
+}
+
+#daftarTugas li {
+    background: #e9ecef;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+#daftarTugas li.selesai {
+    background: #d4edda; /* Warna hijau muda */
+    text-decoration: line-through;
+    color: #6c757d;
+}
+
+.tombol-aksi {
+    display: flex;
+    gap: 10px;
+}
+
+.tombol-aksi button {
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.tombol-aksi .tombol-selesai {
+    background-color: #007bff;
+    color: white;
+}
+
+.tombol-aksi .tombol-hapus {
+    background-color: #dc3545;
+    color: white;
+}
+
+.tombol-aksi button:hover {
+    opacity: 0.8;
 }
