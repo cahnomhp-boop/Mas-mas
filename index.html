@@ -1,36 +1,27 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Xyraa Weather by Nico</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xyraa Weather</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>🌎 Xyraa Weather</h1>
-    <p class="subtitle">Cek kondisi cuaca di kota mana pun 🌤️</p>
+  <div class="weather-app">
+    <h1>🌈 Xyraa Weather</h1>
+    <input type="text" id="cityInput" placeholder="Masukkan nama kota..." />
+    <button onclick="getWeather()">Cek Cuaca</button>
 
-    <div class="search-box">
-      <input type="text" id="cityInput" placeholder="Masukkan nama kota...">
-      <button onclick="getWeather()">Cek</button>
-    </div>
-
-    <div class="weather-card" id="weatherCard">
-      <img id="weatherIcon" class="weather-icon" src="" alt="Weather Icon" style="display:none;">
+    <div id="weatherResult" class="weather-card hidden">
       <h2 id="cityName"></h2>
+      <img id="weatherIcon" alt="Ikon Cuaca" />
       <p id="description"></p>
-      <div class="temp-box">
-        <h3 id="temperature"></h3>
-      </div>
-      <div class="details">
-        <p id="wind"></p>
-        <p id="humidity"></p>
-      </div>
+      <p><strong>Suhu:</strong> <span id="temperature"></span>°C</p>
+      <p><strong>Kelembapan:</strong> <span id="humidity"></span>%</p>
+      <p><strong>Angin:</strong> <span id="wind"></span> m/s</p>
     </div>
   </div>
 
-  <footer>© 2025 XyraaWeather by Nico</footer>
   <script src="script.js"></script>
 </body>
 </html>
