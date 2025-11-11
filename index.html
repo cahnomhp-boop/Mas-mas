@@ -1,27 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Xyraa Weather</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final 3D Weather App</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="weather-app">
-    <h1>🌈 Xyraa Weather</h1>
-    <input type="text" id="cityInput" placeholder="Masukkan nama kota..." />
-    <button onclick="getWeather()">Cek Cuaca</button>
+<div class="container">
+  <h1>Final Super Ultra Realistic 3D Weather App</h1>
 
-    <div id="weatherResult" class="weather-card hidden">
-      <h2 id="cityName"></h2>
-      <img id="weatherIcon" alt="Ikon Cuaca" />
-      <p id="description"></p>
-      <p><strong>Suhu:</strong> <span id="temperature"></span>°C</p>
-      <p><strong>Kelembapan:</strong> <span id="humidity"></span>%</p>
-      <p><strong>Angin:</strong> <span id="wind"></span> m/s</p>
-    </div>
-  </div>
+  <input type="text" id="apiKey" placeholder="Masukkan API Key OpenWeather">
+  <input type="text" id="city" placeholder="Masukkan kota">
+  <button id="checkBtn">Cek Cuaca</button>
 
-  <script src="script.js"></script>
+  <div id="weather"></div>
+  <div id="animation"></div>
+
+  <!-- Suara cuaca -->
+  <audio id="rainSound" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="windSound" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="thunderSound" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mpeg">
+  </audio>
+</div>
+<script src="script.js"></script>
 </body>
 </html>
