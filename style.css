@@ -89,7 +89,7 @@ button:hover { transform:scale(1.05); }
 @keyframes sunSpin {0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
 
 /* Animasi bulan */
-.moon { position:absolute; width:120px; height:120px; top:50px; left:50px; background:url('https://i.ibb.co/Wpf7Fh3/moon.png') no-repeat center center; background-size:contain; animation:moonSpin 40s linear infinite; }
+.moon { position:absolute; width:120px; height:120px; top:50px; left:50px; background:url('What_Does_A_Full_Moon_Symbolize_-removebg-preview.png') no-repeat center center; background-size:contain; animation:moonSpin 40s linear infinite; }
 @keyframes moonSpin {0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
 
 /* Animasi awan */
