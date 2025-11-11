@@ -85,7 +85,7 @@ button:hover { transform:scale(1.05); }
 }
 
 /* Animasi matahari */
-.sun { position:absolute; width:150px; height:150px; top:50px; right:50px; background:url('Vector transparent sunlight special flash light effect light png _ Premium Vector.jpg') no-repeat center center; background-size:contain; animation:sunSpin 20s linear infinite; }
+.sun { position:absolute; width:150px; height:150px; top:50px; right:50px; background:url('a_sun_painted_sun_paint_art_png-removebg-preview.png') no-repeat center center; background-size:contain; animation:sunSpin 20s linear infinite; }
 @keyframes sunSpin {0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
 
 /* Animasi bulan */
