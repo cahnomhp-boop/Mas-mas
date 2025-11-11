@@ -1,47 +1,111 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Weather Location</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div class="container">
-  <h1>☀️ Super Ultra 3D Weather App 🌙</h1>
-  <p class="welcome-text">Selamat datang! Masukkan nama kota untuk melihat cuaca hari ini</p>
+/* Reset dan scroll */
+body, html {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  font-family: 'Roboto', sans-serif;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: linear-gradient(to bottom, #87ceeb, #f0f8ff);
+  color: white;
+  transition: background 2s ease-in-out;
+}
 
-  <input type="text" id="city" placeholder="Masukkan kota">
-  <button id="checkBtn">Cek Cuaca</button>
+/* Container utama */
+.container {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
 
-  <div id="weather">
-    <h2>– – –</h2>
-    <p>Cuaca akan muncul di sini</p>
-  </div>
+/* Judul */
+h1 { font-size:2rem; text-shadow:2px 2px 8px rgba(0,0,0,0.7); margin-bottom:10px; }
 
-  <div id="animation"></div>
+/* Welcome text animasi fade-in + slide */
+.welcome-text {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #fff;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+  margin-bottom: 25px;
+  opacity: 0;
+  transform: translateY(-25px);
+  transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+}
+.fade-in-slide {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-  <!-- Audio efek cuaca -->
-  <audio id="rainSound" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-  </audio>
-  <audio id="windSound" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
-  </audio>
-  <audio id="thunderSound" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mpeg">
-  </audio>
-</div>
+/* Input dan tombol */
+input, button {
+  padding:10px;
+  font-size:16px;
+  margin:5px;
+  border-radius:5px;
+  border:none;
+}
+button {
+  cursor:pointer;
+  background:linear-gradient(90deg,#1e90ff,#00bfff);
+  color:white;
+  font-weight:bold;
+  transition:0.3s;
+}
+button:hover { transform:scale(1.05); }
 
-<script src="script.js"></script>
-<script>
-window.onload = function() {
-  initDefaultAnimation(); // animasi cuaca awal
-  const welcome = document.querySelector('.welcome-text');
-  setTimeout(() => {
-    welcome.classList.add('fade-in-slide'); // fade-in + slide
-  }, 500);
-};
-</script>
-</body>
-</html>
+/* Card cuaca */
+#weather {
+  margin-top:20px;
+  background: rgba(0,0,0,0.3);
+  padding:20px;
+  border-radius:10px;
+  display:inline-block;
+  z-index:10;
+  min-width:250px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#weather:hover { transform:scale(1.05); box-shadow:0 0 20px rgba(255,255,255,0.6); }
+
+/* Animasi cuaca di belakang */
+#animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+/* Animasi matahari */
+.sun { position:absolute; width:150px; height:150px; top:50px; right:50px; background:url('https://i.ibb.co/QNqYyK7/sun.png') no-repeat center center; background-size:contain; animation:sunSpin 20s linear infinite; }
+@keyframes sunSpin {0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+
+/* Animasi bulan */
+.moon { position:absolute; width:120px; height:120px; top:50px; left:50px; background:url('https://i.ibb.co/Wpf7Fh3/moon.png') no-repeat center center; background-size:contain; animation:moonSpin 40s linear infinite; }
+@keyframes moonSpin {0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+
+/* Animasi awan */
+.cloud {position:absolute; width:200px; height:100px; background:url('https://i.ibb.co/3sFqNkT/cloud.png') no-repeat center center; background-size:contain; animation:cloudMove linear infinite;}
+.cloud.layer1 {top:50px; animation-duration:25s; opacity:0.8;}
+.cloud.layer2 {top:120px; animation-duration:40s; opacity:0.6;}
+.cloud.layer3 {top:200px; animation-duration:60s; opacity:0.5;}
+.cloud.layer4 {top:300px; animation-duration:80s; opacity:0.4;}
+@keyframes cloudMove {0%{left:-200px;}100%{left:100%;}}
+
+/* Hujan & Salju */
+.drop {position:absolute; width:2px; height:12px; background:#a0cfff; border-radius:50%; animation:fall linear infinite;}
+@keyframes fall {0%{transform:translateY(-20px);}100%{transform:translateY(100vh);}}
+
+.snow {position:absolute; width:6px; height:6px; background:#fff; border-radius:50%; opacity:0.9; animation:snowFall linear infinite;}
+@keyframes snowFall {0%{transform:translateY(-10px);}100%{transform:translateY(100vh);}}
+
+.stars {position:absolute;width:2px;height:2px;background:white;border-radius:50%;animation:starTwinkle 3s infinite alternate; opacity:0.8;}
+@keyframes starTwinkle {0%{opacity:0.2;}100%{opacity:0.8;}}
