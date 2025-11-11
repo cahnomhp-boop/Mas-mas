@@ -15,14 +15,6 @@ body, html {
 h1 { font-size:2rem; text-shadow:2px 2px 8px rgba(0,0,0,0.7); margin-bottom:10px; }
 .welcome-text { font-size:1.2rem; margin-bottom:20px; opacity:0.85; }
 
-.welcome-text {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-  opacity: 0;
-  transform: translateY(-20px);
-  transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
-}
-
 .fade-in-slide { 
   opacity: 1;
   transform: translateY(0);
