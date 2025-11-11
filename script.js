@@ -1,5 +1,8 @@
 let lightningInterval,rainAudio,windAudio,thunderAudio;
 
+// API Key langsung di script
+const API_KEY = "M0de15874ccf6e0d3c7cf7e39e51f7c7a"; // <-- ganti dengan key OpenWeather-mu
+
 function clearAnimation(){
   const anim=document.getElementById('animation'); anim.innerHTML=''; anim.className='';
   document.body.classList.remove('night','day','sunset');
@@ -78,7 +81,6 @@ function createSunMoon(localHour){
 
 function setAnimation(weather,dt,timezone){
   clearAnimation();
-  const anim=document.getElementById('animation');
   const localHour=new Date((dt+timezone)*1000).getUTCHours();
   if(localHour<6||localHour>18){document.body.classList.add('night');}
   else if(localHour>=17 && localHour<=19){document.body.classList.add('sunset');}
@@ -92,11 +94,9 @@ function setAnimation(weather,dt,timezone){
 }
 
 async function getWeather(){
-  const apiKey=document.getElementById('apiKey').value.trim();
   const city=document.getElementById('city').value.trim();
-  if(!apiKey)return alert("Masukkan API key!");
   if(!city)return alert("Masukkan kota!");
-  const url=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=id`;
+  const url=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=id`;
 
   try{
     const response=await fetch(url);
