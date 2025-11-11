@@ -1,5 +1,5 @@
 let lightningInterval,rainAudio,windAudio,thunderAudio;
-const API_KEY = "MASUKKAN_API_KEY_DI_SINI"; // ganti dengan key-mu
+const API_KEY = "0de15874ccf6e0d3c7cf7e39e51f7c7a"; // ganti dengan key-mu
 
 function clearAnimation(){
   const anim=document.getElementById('animation'); anim.innerHTML=''; anim.className='';
