@@ -1,125 +1,99 @@
-/* Import font dari Google untuk tampilan modern */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-body {
-    /* Menggunakan font Poppins */
-    font-family: 'Poppins', sans-serif;
-    /* Latar belakang gradien lembut */
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Mengubah flex-start menjadi center agar wadah di tengah vertikal */
-    min-height: 100vh;
-    margin: 0;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
-.wadah {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 35px;
-    border-radius: 20px;
-    /* Soft Shadow yang lebih elegan */
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 450px;
-    backdrop-filter: blur(5px); /* Efek Glassmorphism lembut */
-    transition: transform 0.3s ease;
+body {
+  background: linear-gradient(135deg, #6dd5fa, #00cba9);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 30px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 h1 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 30px;
-    font-size: 2em;
-    font-weight: 700;
+  font-size: 1.8em;
+  margin-bottom: 5px;
 }
 
-.input-tugas {
-    display: flex;
-    margin-bottom: 25px;
-    border-radius: 8px;
-    overflow: hidden; /* Memastikan border-radius diterapkan ke input & button */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+.subtitle {
+  font-size: 0.9em;
+  color: #e0f7fa;
+  margin-bottom: 20px;
 }
 
-#inputTugas {
-    flex-grow: 1;
-    padding: 15px;
-    border: none;
-    font-size: 16px;
-    background: #ffffff;
+.search-box {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
-.input-tugas button {
-    padding: 15px 20px;
-    background-color: #007bff; /* Warna biru cerah */
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    transition: background-color 0.3s;
+.search-box input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  font-size: 1em;
 }
 
-.input-tugas button:hover {
-    background-color: #0056b3;
+.search-box button {
+  background: #00796b;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-#daftarTugas {
-    list-style: none;
-    padding: 0;
+.search-box button:hover {
+  background: #26a69a;
 }
 
-#daftarTugas li {
-    background: #ffffff;
-    padding: 15px 20px;
-    margin-bottom: 12px;
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-left: 5px solid #007bff; /* Garis penanda tugas */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
+.weather-card {
+  display: none;
+  margin-top: 10px;
 }
 
-#daftarTugas li:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+.weather-icon {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
 }
 
-/* Gaya untuk tugas yang sudah selesai */
-#daftarTugas li.selesai {
-    background: #e9f7ef; /* Latar belakang hijau sangat muda */
-    text-decoration: line-through;
-    color: #6c757d;
-    border-left: 5px solid #28a745; /* Garis penanda hijau */
+.temp-box h3 {
+  font-size: 2.5em;
+  margin: 10px 0;
 }
 
-.tombol-aksi {
-    display: flex;
-    gap: 8px;
+.details {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+  font-size: 0.95em;
 }
 
-.tombol-aksi button {
-    border: none;
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    transition: opacity 0.3s;
+footer {
+  position: absolute;
+  bottom: 15px;
+  font-size: 0.8em;
+  color: #e0f2f1;
 }
-
-.tombol-aksi .tombol-selesai {
-    background-color: #28a745; /* Hijau untuk Selesai */
-    color: white;
-}
-
-.tombol-aksi .tombol-hapus {
-    background-color: #dc3545; /* Merah untuk Hapus */
-    color: white;
-}
-
-.tombol-aksi button:hover {
-    opacity: 0.8;
-}f
