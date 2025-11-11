@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Weater Location</title>
+<title>Weather Location</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="container">
-  <h1>☀️ Weater Location 🌙</h1>
-  <p class="welcome-text">Selamat datang! Masukkan kota untuk melihat cuaca!</p>
+  <h1>☀️ Super Ultra 3D Weather App 🌙</h1>
+  <p class="welcome-text">Selamat datang! Masukkan nama kota untuk melihat cuaca hari ini</p>
 
   <input type="text" id="city" placeholder="Masukkan kota">
   <button id="checkBtn">Cek Cuaca</button>
@@ -18,9 +18,10 @@
     <h2>– – –</h2>
     <p>Cuaca akan muncul di sini</p>
   </div>
+
   <div id="animation"></div>
 
-  <!-- Suara efek cuaca -->
+  <!-- Audio efek cuaca -->
   <audio id="rainSound" loop>
     <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
   </audio>
@@ -31,6 +32,16 @@
     <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mpeg">
   </audio>
 </div>
+
 <script src="script.js"></script>
+<script>
+window.onload = function() {
+  initDefaultAnimation(); // animasi cuaca awal
+  const welcome = document.querySelector('.welcome-text');
+  setTimeout(() => {
+    welcome.classList.add('fade-in-slide'); // fade-in + slide
+  }, 500);
+};
+</script>
 </body>
 </html>
