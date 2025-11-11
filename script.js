@@ -1,48 +1,126 @@
-// GANTI DENGAN API KEY KAMU DARI https://openweathermap.org/
-const apiKey = "0de15874ccf6e0d3c7cf7e39e51f7c7a"; 
+let lightningInterval,rainAudio,windAudio,thunderAudio;
 
-async function getWeather() {
-  const city = document.getElementById("cityInput").value.trim();
-  if (!city) {
-    alert("Masukkan nama kota dulu ya!");
-    return;
-  }
+function clearAnimation(){
+  const anim=document.getElementById('animation'); anim.innerHTML=''; anim.className='';
+  document.body.classList.remove('night','day','sunset');
+  if(lightningInterval) clearInterval(lightningInterval);
+  if(rainAudio){rainAudio.pause(); rainAudio.currentTime=0;}
+  if(windAudio){windAudio.pause(); windAudio.currentTime=0;}
+  if(thunderAudio){thunderAudio.pause(); thunderAudio.currentTime=0;}
+}
 
-  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${0de15874ccf6e0d3c7cf7e39e51f7c7a}&units=metric&lang=id`;
-
-  try {
-    const response = await fetch(apiUrl);
-    const data = await response.json();
-
-    if (data.cod === "404") {
-      alert("Kota tidak ditemukan, coba lagi!");
-      return;
+function createRain(){
+  const anim=document.getElementById('animation');
+  for(let layer=1;layer<=4;layer++){
+    for(let i=0;i<50;i++){
+      const drop=document.createElement('div'); drop.className=`drop layer${layer}`;
+      drop.style.left=Math.random()*100+'vw'; drop.style.top=Math.random()*-100+'vh';
+      drop.style.transform=`translateX(${Math.random()*20 -10}px)`; // arah acak
+      anim.appendChild(drop);
     }
+  }
+  rainAudio=document.getElementById('rainSound'); rainAudio.volume=0.2; rainAudio.play();
+}
 
-    document.getElementById("weatherResult").classList.remove("hidden");
-    document.getElementById("cityName").textContent = data.name;
-    document.getElementById("description").textContent = data.weather[0].description;
-    document.getElementById("temperature").textContent = data.main.temp;
-    document.getElementById("humidity").textContent = data.main.humidity;
-    document.getElementById("wind").textContent = data.wind.speed;
-
-    const iconCode = data.weather[0].icon;
-    const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
-    document.getElementById("weatherIcon").src = iconUrl;
-
-    // Ganti background sesuai cuaca
-    const weatherMain = data.weather[0].main.toLowerCase();
-    document.body.className = ""; // reset background
-
-    if (weatherMain.includes("clear")) document.body.classList.add("sunny");
-    else if (weatherMain.includes("cloud")) document.body.classList.add("cloudy");
-    else if (weatherMain.includes("rain")) document.body.classList.add("rainy");
-    else if (weatherMain.includes("storm")) document.body.classList.add("stormy");
-    else if (weatherMain.includes("snow")) document.body.classList.add("snowy");
-    else document.body.classList.add("cloudy");
-
-  } catch (error) {
-    alert("Terjadi kesalahan dalam mengambil data cuaca!");
-    console.error(error);
+function createSnow(){
+  const anim=document.getElementById('animation');
+  for(let layer=1;layer<=4;layer++){
+    for(let i=0;i<40;i++){
+      const flake=document.createElement('div'); flake.className=`snow layer${layer}`;
+      flake.style.left=Math.random()*100+'vw'; flake.style.top=Math.random()*-100+'vh';
+      flake.style.transform=`translateX(${Math.random()*30 -15}px)`;
+      anim.appendChild(flake);
+    }
   }
 }
+
+function createStars(){
+  const anim=document.getElementById('animation');
+  for(let i=0;i<100;i++){
+    const star=document.createElement('div'); star.className='stars';
+    star.style.top=Math.random()*100+'vh';
+    star.style.left=Math.random()*100+'vw';
+    star.style.width=(Math.random()*2+1)+'px';
+    star.style.height=(Math.random()*2+1)+'px';
+    anim.appendChild(star);
+  }
+}
+
+function createLightning(){
+  const lightning=document.createElement('div'); lightning.className='lightning';
+  document.getElementById('animation').appendChild(lightning);
+  thunderAudio=document.getElementById('thunderSound'); thunderAudio.volume=0.1;
+  lightningInterval=setInterval(()=>{
+    lightning.classList.add('flash'); thunderAudio.play();
+    setTimeout(()=>lightning.classList.remove('flash'),200);
+  },1500+Math.random()*3000);
+}
+
+function createClouds(){
+  const anim=document.getElementById('animation');
+  for(let layer=1;layer<=4;layer++){
+    const cloud=document.createElement('div'); cloud.className=`cloud layer${layer}`;
+    cloud.style.top=(50 + layer*50)+'px';
+    cloud.style.opacity=0.5 + Math.random()*0.5;
+    anim.appendChild(cloud);
+  }
+}
+
+function createSunMoon(localHour){
+  const anim=document.getElementById('animation');
+  if(localHour>=6 && localHour<=18){
+    const sun=document.createElement('div'); sun.className='sun'; anim.appendChild(sun);
+  } else{
+    createStars();
+    const moon=document.createElement('div'); moon.className='moon'; anim.appendChild(moon);
+  }
+}
+
+function setAnimation(weather,dt,timezone){
+  clearAnimation();
+  const anim=document.getElementById('animation');
+  const localHour=new Date((dt+timezone)*1000).getUTCHours();
+  if(localHour<6||localHour>18){document.body.classList.add('night');}
+  else if(localHour>=17 && localHour<=19){document.body.classList.add('sunset');}
+  else{document.body.classList.add('day');}
+
+  createSunMoon(localHour);
+
+  if(weather.includes("hujan")||weather.includes("rain")){createRain(); if(weather.includes("deras")||weather.includes("heavy")) createLightning();}
+  else if(weather.includes("awan")||weather.includes("cloud")){createClouds();}
+  else if(weather.includes("salju")||weather.includes("snow")){createSnow();}
+}
+
+async function getWeather(){
+  const apiKey=document.getElementById('apiKey').value.trim();
+  const city=document.getElementById('city').value.trim();
+  if(!apiKey)return alert("Masukkan API key!");
+  if(!city)return alert("Masukkan kota!");
+  const url=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=id`;
+
+  try{
+    const response=await fetch(url);
+    if(!response.ok)throw new Error("Kota tidak ditemukan atau API key salah");
+    const data=await response.json();
+    const weatherDesc=data.weather[0].description;
+    const icon=`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+    setAnimation(weatherDesc,data.dt,data.timezone);
+
+    document.getElementById('weather').innerHTML=`
+      <h2>${data.name}, ${data.sys.country}</h2>
+      <img class="weather-icon" src="${icon}" alt="icon cuaca">
+      <p>${weatherDesc}</p>
+      <p>🌡️ Suhu: ${data.main.temp}°C</p>
+      <p>💧 Kelembaban: ${data.main.humidity}%</p>
+      <p>💨 Angin: ${data.wind.speed} m/s</p>
+      <p>🔆 Tekanan: ${data.main.pressure} hPa</p>
+      <p>🌅 Sunrise: ${new Date((data.sys.sunrise+data.timezone)*1000).toUTCString()}</p>
+      <p>🌇 Sunset: ${new Date((data.sys.sunset+data.timezone)*1000).toUTCString()}</p>
+    `;
+  }catch(err){
+    document.getElementById('weather').innerHTML=`<p style="color:red">${err.message}</p>`;
+    clearAnimation();
+  }
+}
+
+document.getElementById('checkBtn').addEventListener('click',getWeather);
