@@ -1,62 +1,43 @@
-// Dapatkan elemen-elemen DOM yang dibutuhkan
-const inputTugas = document.getElementById('inputTugas');
-const daftarTugas = document.getElementById('daftarTugas');
+const apiKey = "YOUR_API_KEY"; // Ganti dengan API key OpenWeatherMap kamu
 
-// Fungsi untuk menambahkan tugas baru
-function tambahTugas() {
-    const teksTugas = inputTugas.value.trim();
+async function getWeather() {
+  const city = document.getElementById("cityInput").value.trim();
+  const card = document.getElementById("weatherCard");
+  const icon = document.getElementById("weatherIcon");
+  const cityName = document.getElementById("cityName");
+  const desc = document.getElementById("description");
+  const temp = document.getElementById("temperature");
+  const wind = document.getElementById("wind");
+  const humidity = document.getElementById("humidity");
 
-    // Periksa apakah input tidak kosong
-    if (teksTugas === "") {
-        alert("Mohon masukkan tugas terlebih dahulu!");
-        return;
+  if (!city) {
+    alert("Masukkan nama kota dulu ya 🌆");
+    return;
+  }
+
+  try {
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=id`;
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (data.cod === "404") {
+      alert("❌ Kota tidak ditemukan, coba lagi.");
+      return;
     }
 
-    // Buat elemen <li> baru
-    const itemTugas = document.createElement('li');
-    itemTugas.innerHTML = `
-        <span>${teksTugas}</span>
-        <div class="tombol-aksi">
-            <button class="tombol-selesai" onclick="tandaiSelesai(this)">Selesai</button>
-            <button class="tombol-hapus" onclick="hapusTugas(this)">Hapus</button>
-        </div>
-    `;
+    const iconUrl = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
 
-    // Tambahkan item tugas ke dalam daftar <ul>
-    daftarTugas.appendChild(itemTugas);
+    cityName.textContent = `${data.name}, ${data.sys.country}`;
+    desc.textContent = data.weather[0].description;
+    temp.textContent = `${Math.round(data.main.temp)}°C`;
+    wind.textContent = `💨 Angin: ${data.wind.speed} m/s`;
+    humidity.textContent = `💧 Kelembapan: ${data.main.humidity}%`;
 
-    // Kosongkan input setelah tugas ditambahkan
-    inputTugas.value = '';
+    icon.src = iconUrl;
+    icon.style.display = "block";
+    card.style.display = "block";
+
+  } catch (err) {
+    alert("Terjadi kesalahan saat mengambil data cuaca ☁️");
+  }
 }
-
-// Fungsi untuk menandai tugas sebagai selesai
-function tandaiSelesai(tombol) {
-    // Dapatkan elemen <li> induk dari tombol
-    const itemTugas = tombol.closest('li');
-    
-    // Toggle class 'selesai'
-    itemTugas.classList.toggle('selesai');
-
-    // Ubah teks tombol "Selesai"
-    if (itemTugas.classList.contains('selesai')) {
-        tombol.textContent = "Batal";
-        tombol.style.backgroundColor = '#ffc107'; // Warna kuning
-    } else {
-        tombol.textContent = "Selesai";
-        tombol.style.backgroundColor = '#007bff'; // Warna biru
-    }
-}
-
-// Fungsi untuk menghapus tugas
-function hapusTugas(tombol) {
-    // Dapatkan elemen <li> induk dari tombol dan hapus
-    const itemTugas = tombol.closest('li');
-    itemTugas.remove();
-}
-
-// Memungkinkan penambahan tugas dengan tombol 'Enter'
-inputTugas.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        tambahTugas();
-    }
-});
