@@ -1,7 +1,5 @@
 let lightningInterval,rainAudio,windAudio,thunderAudio;
-
-// API Key langsung di script
-const API_KEY = "0de15874ccf6e0d3c7cf7e39e51f7c7a"; // <-- ganti dengan key kamu
+const API_KEY = "MASUKKAN_API_KEY_DI_SINI"; // ganti dengan key-mu
 
 function clearAnimation(){
   const anim=document.getElementById('animation'); anim.innerHTML=''; anim.className='';
@@ -123,4 +121,37 @@ async function getWeather(){
   }
 }
 
+// Tampilan awal super hidup
+function initDefaultAnimation(){
+  const hour=new Date().getHours();
+  const anim=document.getElementById('animation');
+
+  if(hour>=6 && hour<=18){document.body.classList.add('day');} 
+  else if(hour>=17 && hour<=19){document.body.classList.add('sunset');}
+  else{document.body.classList.add('night'); createStars();}
+
+  createClouds(); createSunMoon(hour);
+
+  // Hujan/salju ringan awal lebih natural
+  for(let i=0;i<40;i++){
+    const drop=document.createElement('div');
+    if(hour>=6 && hour<=18){
+      drop.className='initDrop';
+      drop.style.height=(6+Math.random()*6)+'px';
+      drop.style.width='2px';
+      drop.style.animationDuration=(1+Math.random()*1.5)+'s';
+    } else{
+      drop.className='initSnow';
+      const size=3+Math.random()*4;
+      drop.style.width=size+'px'; drop.style.height=size+'px';
+      drop.style.animationDuration=(2+Math.random()*2)+'s';
+      drop.style.opacity=0.3+Math.random()*0.5;
+    }
+    drop.style.left=Math.random()*100+'vw';
+    drop.style.top=Math.random()*-100+'vh';
+    anim.appendChild(drop);
+  }
+}
+
 document.getElementById('checkBtn').addEventListener('click',getWeather);
+window.onload=initDefaultAnimation;
