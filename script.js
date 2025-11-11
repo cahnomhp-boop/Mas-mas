@@ -1,7 +1,7 @@
 let lightningInterval,rainAudio,windAudio,thunderAudio;
 
 // API Key langsung di script
-const API_KEY = "M0de15874ccf6e0d3c7cf7e39e51f7c7a"; // <-- ganti dengan key OpenWeather-mu
+const API_KEY = "0de15874ccf6e0d3c7cf7e39e51f7c7a"; // <-- ganti dengan key kamu
 
 function clearAnimation(){
   const anim=document.getElementById('animation'); anim.innerHTML=''; anim.className='';
@@ -18,7 +18,7 @@ function createRain(){
     for(let i=0;i<50;i++){
       const drop=document.createElement('div'); drop.className=`drop layer${layer}`;
       drop.style.left=Math.random()*100+'vw'; drop.style.top=Math.random()*-100+'vh';
-      drop.style.transform=`translateX(${Math.random()*20 -10}px)`; // arah acak
+      drop.style.transform=`translateX(${Math.random()*20 -10}px)`;
       anim.appendChild(drop);
     }
   }
