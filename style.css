@@ -93,7 +93,7 @@ button:hover { transform:scale(1.05); }
 @keyframes moonSpin {0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
 
 /* Animasi awan */
-.cloud {position:absolute; width:200px; height:100px; background:url('https://i.ibb.co/3sFqNkT/cloud.png') no-repeat center center; background-size:contain; animation:cloudMove linear infinite;}
+.cloud {position:absolute; width:200px; height:100px; background:url('Download free png of White frame cloud outdoors weather_ by Pinn about cloud png, cloud, smoke png frame, png, and smoke png 15438285.jpg') no-repeat center center; background-size:contain; animation:cloudMove linear infinite;}
 .cloud.layer1 {top:50px; animation-duration:25s; opacity:0.8;}
 .cloud.layer2 {top:120px; animation-duration:40s; opacity:0.6;}
 .cloud.layer3 {top:200px; animation-duration:60s; opacity:0.5;}
